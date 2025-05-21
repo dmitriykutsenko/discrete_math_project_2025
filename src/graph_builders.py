@@ -12,12 +12,18 @@ def build_knn_graph(samples: np.ndarray, k: int) -> nx.Graph:
     Параметры:
     ----------
     samples : np.ndarray
+        Одномерный массив данных.
     k : int
+        Количество ближайших соседей.
 
     Возвращает:
     ----------
     nx.Graph
+        Получившийся граф.
     """
+
+    if not isinstance(k, int):
+        raise TypeError("k must be int")
 
     samples = np.asarray(samples)
     n = samples.shape[0]
@@ -55,11 +61,14 @@ def build_distance_graph(samples: np.ndarray, d: float) -> nx.Graph:
     Параметры:
     ----------
     samples : np.ndarray
+        Одномерный массив данных.
     d : float
+        Порог расстояния.
 
     Возвращает:
     ----------
     nx.Graph
+        Получившийся граф.
     """
 
     if not isinstance(d, (int, float)):
