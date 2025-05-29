@@ -8,6 +8,7 @@ def simulate_sample(n: int, dist: str, params: dict) -> np.ndarray:
     Параметры:
     ----------
     n : int
+        Размер выборки.
     dist : str
         Название распределения: "normal", "laplace", "pareto", "exponential".
     params : dict
@@ -23,9 +24,12 @@ def simulate_sample(n: int, dist: str, params: dict) -> np.ndarray:
         Сгенерированная выборка.
     """
 
+    if not isinstance(n, int):
+        raise TypeError("Sample size n must be int")
     if n < 0:
         raise ValueError("Sample size n must be non-negative")
-
+    if not isinstance(params, dict):
+        raise TypeError("params must be a dict")
     for key, val in params.items():
         if not isinstance(val, (int, float)):
             raise TypeError(

@@ -24,16 +24,26 @@ def compute_feature(G: nx.Graph, feature_name: str) -> float:
     """
     Вычисляет структурную характеристику неориентированного графа G.
 
+    Поддерживаемые характеристики:
+    - max_degree, min_degree, num_components, triangle_count,
+    - max_independent_set, chromatic_number, clique_number,
+    - domination_number, clique_cover_number, articulation_points
+
     Параметры:
     ----------
     G : networkx.Graph
+        Неориентированный граф.
     feature_name : str
+        Название характеристики.
 
     Возвращает:
     ----------
     float
         Значение характеристики графа.
     """
+
+    if not isinstance(G, nx.Graph):
+        raise TypeError("G must be a networkx.Graph")
 
     if feature_name not in SUPPORTED_FEATURES:
         raise ValueError(
@@ -55,6 +65,7 @@ def compute_feature(G: nx.Graph, feature_name: str) -> float:
         tris = nx.triangles(G)
         return float(sum(tris.values()) / 3)
 
+    # heavier features
     if feature_name == "max_independent_set":
         mis = maximum_independent_set(G)
         return float(len(mis))
@@ -81,3 +92,6 @@ def compute_feature(G: nx.Graph, feature_name: str) -> float:
 
     if feature_name == "articulation_points":
         return float(sum(1 for _ in articulation_points(G)))
+
+    # Should never get here
+    raise RuntimeError("Unhandled feature")
