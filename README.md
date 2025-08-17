@@ -31,26 +31,6 @@
 
 ---
 
-## Структура проекта
-
-.
-├── notebooks/ # Jupyter-ноутбуки с шагами анализа
-│ ├── part_1_distribution_exploration.ipynb
-│ └── part_2_experiment.ipynb
-├── src/ # Основная библиотека
-│ ├── init.py
-│ ├── features.py
-│ ├── graph_builders.py
-│ ├── simulation.py
-│ └── utils.py
-├── tests/ # Тесты для модулей src/
-├── .flake8
-├── .gitignore
-└── README.md
-
-
----
-
 ## src/
 
 ### __init__.py  
